@@ -158,7 +158,7 @@ intel_df <- moore_df %>% filter(type =="CPU",
   mutate(log10_transistors = log10(transistors)) %>%
 #   distinct(date, .keep_all = TRUE)
   group_by(date) %>%
-  summarize(log10_transistors = mean(log10_transistors, na.rm = TRUE))
+  summarize(log10_transistors = max(log10_transistors, na.rm = TRUE))
   #
 
 # Percent ---------------------------------------------------------
@@ -227,7 +227,7 @@ p <-
                 fill = NA,
                 label.color = NA,
                 hjust = c(1)) +
-  scale_colour_scico(palette = "vik",
+  scale_colour_scico(palette = "lapaz",
                      direction = 1,
                      limits = c(-lim, lim),
                      guide = FALSE) +#+
@@ -264,7 +264,7 @@ p <- p + #annotation_custom(rast, ymin = 9, ymax = 10, xmin = 1970) +
       # Change axis line
       axis.line = element_line(colour = "white"),
       axis.text = element_text(colour = "white"))
-
+p
 # img <- png::readPNG("./intel3.png")
 # rast <- grid::rasterGrob(img, interpolate = T)
 # annotation_custom(rast, ymin = 24000, ymax = 27000, xmin = 2)
